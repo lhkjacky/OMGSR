@@ -98,7 +98,8 @@ def main(args):
 
         output_image = output_image * 0.5 + 0.5
         output_image = torch.clip(output_image, 0, 1)
-        output_pil = transforms.ToPILImage()(output_image[0].cpu())
+        #output_pil = transforms.ToPILImage()(output_image[0].cpu())
+        output_pil = transforms.ToPILImage()(output_image[0].cpu().float())  # Converts bfloat16 -> float32
 
         if args.align_method == 'adain':
             output_pil = adain_color_fix(target=output_pil, source=input_image)
